@@ -4,11 +4,10 @@
   "private": true,
   "description": "Discord join verification bot with dashboard",
   "main": "index.js",
-  "scripts": {
-  "start": "node index.js",
-  "deploy": "node deploy-commands.js"
-},
-  
+    "scripts": {
+    "start": "node src/index.js || node index.js || node src/src/index.js",
+    "deploy": "node src/deploy-commands.js || node deploy-commands.js"
+  },
   "engines": {
     "node": ">=20.0.0"
   },
