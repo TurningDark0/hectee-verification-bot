@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#111318">
+  <title>Hectee Control Room</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="auth-screen" id="auth-screen">
+    <div class="auth-mark"><span class="brand-mark"><i data-lucide="command"></i></span><span>HECTEE <b>CONTROL</b></span></div>
+    <div class="auth-grid"></div>
+    <main class="auth-content">
+      <div class="auth-kicker"><span class="live-dot"></span> BOT CONTROL ROOM</div>
+      <h1>Make your<br><em>server yours.</em></h1>
+      <p>One calm place to tune every moving part of your Discord server.</p>
+      <button class="button button-discord" id="login-button"><i data-lucide="gamepad-2"></i><span>Continue with Discord</span><i data-lucide="arrow-up-right"></i></button>
+      <p class="auth-error" id="auth-error" aria-live="polite"></p>
+      <div class="auth-foot"><span>PRIVATE BY DESIGN</span><span>DISCORD OAUTH</span></div>
+    </main>
+  </div>
+
+  <div class="app-shell hidden" id="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand"><span class="brand-mark small"><i data-lucide="command"></i></span><span>HECTEE <b>CONTROL</b></span><button class="icon-button sidebar-close" id="sidebar-close" aria-label="Close navigation"><i data-lucide="x"></i></button></div>
+      <button class="server-switcher" id="server-switcher"><span class="server-mini-icon" id="sidebar-server-icon">H</span><span class="server-switch-copy"><small>MANAGING</small><strong id="sidebar-server-name">Choose server</strong></span><i data-lucide="chevrons-up-down"></i></button>
+      <div class="nav-label">WORKSPACE</div>
+      <nav class="primary-nav" aria-label="Dashboard navigation">
+        <button class="nav-item active" data-view="overview"><i data-lucide="layout-dashboard"></i><span>Overview</span></button>
+        <button class="nav-item" data-view="plugins"><i data-lucide="blocks"></i><span>Plugins</span><span class="nav-count">6</span></button>
+        <button class="nav-item" data-view="composer"><i data-lucide="panels-top-left"></i><span>Message studio</span><span class="nav-new">NEW</span></button>
+      </nav>
+      <div class="nav-label nav-label-spaced">YOUR PLUGINS</div>
+      <nav class="plugin-nav" id="plugin-nav" aria-label="Plugin settings"></nav>
+      <div class="sidebar-bottom">
+        <div class="connection-card"><span class="connection-icon"><i data-lucide="radio"></i></span><span><strong>Bot connection</strong><small><span class="live-dot"></span> All systems ready</small></span></div>
+        <button class="profile-button" id="profile-button"><span class="avatar avatar-small" id="user-avatar">U</span><span class="profile-copy"><strong id="profile-name">Account</strong><small>Discord account</small></span><i data-lucide="log-out"></i></button>
+      </div>
+    </aside>
+    <div class="mobile-scrim" id="mobile-scrim"></div>
+
+    <main class="main-area">
+      <header class="topbar">
+        <button class="icon-button mobile-menu" id="mobile-menu" aria-label="Open navigation"><i data-lucide="menu"></i></button>
+        <div class="breadcrumbs"><span id="breadcrumb-server">Servers</span><i data-lucide="chevron-right"></i><strong id="breadcrumb-page">Overview</strong></div>
+        <div class="topbar-actions"><span class="save-indicator" id="save-indicator"><span class="save-dot"></span> All changes saved</span><button class="icon-button" id="top-server-switch" aria-label="Change server" title="Change server"><i data-lucide="server"></i></button><span class="avatar avatar-top" id="top-avatar">U</span></div>
+      </header>
+
+      <section class="view server-view hidden" id="server-view">
+        <div class="page-heading server-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> YOUR DISCORDS</div><h1>Pick your <em>server.</em></h1><p>Choose a community to open its control room.</p></div><div class="server-total"><strong id="server-total">0</strong><span>AVAILABLE</span></div></div>
+        <div class="server-grid" id="server-grid"></div>
+        <div class="server-empty hidden" id="server-empty"><i data-lucide="compass"></i><h2>No manageable servers yet</h2><p>Sign in with an account that has Manage Server permission to get started.</p></div>
+      </section>
+
+      <section class="view hidden" id="overview-view">
+        <div class="page-heading overview-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> SERVER OVERVIEW</div><h1 id="overview-title">Your server, <em>in sync.</em></h1><p>Six focused plugins. One place to keep everything running smoothly.</p></div><button class="button button-primary" data-goto="composer"><i data-lucide="plus"></i> Create a message</button></div>
+        <div class="overview-strip"><div class="overview-stat"><span class="stat-icon stat-violet"><i data-lucide="blocks"></i></span><span><small>ACTIVE PLUGINS</small><strong id="active-count">0 <i>of 6</i></strong></span></div><div class="stat-divider"></div><div class="overview-stat"><span class="stat-icon stat-green"><i data-lucide="shield-check"></i></span><span><small>SERVER STATUS</small><strong><span class="status-pulse"></span> Connected</strong></span></div><div class="stat-note"><i data-lucide="sparkles"></i><span>Small switches. Big peace of mind.</span></div></div>
+        <div class="section-heading"><div><span class="eyebrow">THE TOOLKIT</span><h2>Plugins <span class="muted-heading">/</span> <span id="plugin-active-label">0 active</span></h2></div><button class="text-button" data-view-target="plugins">Manage all <i data-lucide="arrow-right"></i></button></div>
+        <div class="plugin-grid" id="overview-plugin-grid"></div>
+      </section>
+
+      <section class="view hidden" id="plugins-view">
+        <div class="page-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> MODULES</div><h1>Your plugins, <em>your rules.</em></h1><p>Switch features on or off. Your server settings stay saved.</p></div></div>
+        <div class="plugin-grid plugin-grid-full" id="all-plugin-grid"></div>
+      </section>
+
+      <section class="view hidden" id="settings-view">
+        <div class="page-heading settings-heading"><button class="back-link" id="back-to-overview"><i data-lucide="arrow-left"></i> All plugins</button><div class="plugin-title-row"><span class="plugin-hero-icon" id="settings-icon"></span><div><div class="eyebrow" id="settings-eyebrow">PLUGIN SETTINGS</div><h1 id="settings-title">Plugin</h1><p id="settings-description"></p></div><label class="switch switch-large"><input type="checkbox" id="settings-toggle"><span class="switch-track"></span><span class="sr-only">Enable plugin</span></label></div></div>
+        <div class="settings-layout"><div class="settings-main" id="plugin-settings-form"></div><aside class="settings-aside"><div class="aside-note"><span class="aside-note-icon"><i data-lucide="lightbulb"></i></span><span class="eyebrow">QUICK TIP</span><p id="settings-tip"></p></div><div class="aside-note aside-warning hidden" id="intent-warning"><span class="aside-note-icon"><i data-lucide="triangle-alert"></i></span><span class="eyebrow">DISCORD SETUP</span><p>Automod and text triggers need <strong>Message Content Intent</strong> enabled in the Discord Developer Portal.</p></div></aside></div>
+      </section>
+
+      <section class="view hidden" id="composer-view">
+        <div class="page-heading composer-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> MESSAGE STUDIO</div><h1>Make it <em>say something.</em></h1><p>Compose a welcome message and see it take shape in real time.</p></div><div class="composer-top-actions"><button class="button button-subtle" id="reset-composer"><i data-lucide="rotate-ccw"></i> Reset</button><button class="button button-primary" id="save-message"><i data-lucide="save"></i> Save message</button></div></div>
+        <div class="studio-layout">
+          <div class="editor-column">
+            <div class="editor-section message-section"><div class="editor-section-heading"><span class="editor-step">01</span><div><h2>Message</h2><p>Plain text above your embed</p></div></div><label class="field-label" for="welcome-channel">POST TO CHANNEL</label><select class="input-control" id="welcome-channel"><option value="">Choose a channel</option></select><label class="field-label" for="message-content">MESSAGE TEXT</label><textarea class="input-control textarea-compact" id="message-content" rows="3" placeholder="Welcome {user} to {server}!"></textarea><span class="field-hint">Use {user}, {server}, and {rules} as dynamic text.</span></div>
+            <div class="editor-section"><div class="editor-section-heading"><span class="editor-step">02</span><div><h2>Embed</h2><p>Shape the details and color</p></div></div><div class="color-row"><div class="color-input-wrap"><label class="field-label" for="embed-color">ACCENT COLOR</label><div class="color-control"><input type="color" id="embed-color" value="#5865f2"><input class="input-control color-hex" id="embed-color-hex" value="#5865f2" maxlength="7" aria-label="Hex accent color"></div></div><span class="color-swatch" id="color-swatch"></span></div><label class="field-label" for="embed-author">AUTHOR NAME</label><input class="input-control" id="embed-author" placeholder="Hectee Community"><label class="field-label" for="embed-author-icon">AUTHOR ICON URL</label><input class="input-control" id="embed-author-icon" type="url" placeholder="https://example.com/icon.png"><label class="field-label" for="embed-title">TITLE</label><input class="input-control" id="embed-title" placeholder="Welcome aboard"><label class="field-label" for="embed-description">DESCRIPTION</label><textarea class="input-control" id="embed-description" rows="4" placeholder="We're glad you're here. Take a moment to read the rules."></textarea><div class="two-column-fields"><div><label class="field-label" for="embed-thumbnail">THUMBNAIL URL</label><input class="input-control" id="embed-thumbnail" type="url" placeholder="https://..."></div><div><label class="field-label" for="embed-image">LARGE IMAGE URL</label><input class="input-control" id="embed-image" type="url" placeholder="https://..."></div></div><div class="field-list-heading"><label class="field-label">EMBED FIELDS</label><button class="text-button small-text-button" id="add-field"><i data-lucide="plus"></i> Add field</button></div><div class="field-editor-list" id="field-editor-list"></div><label class="field-label" for="embed-footer">FOOTER TEXT</label><input class="input-control" id="embed-footer" placeholder="Member since 2026">
+            </div>
+            <div class="editor-section component-section"><div class="editor-section-heading"><span class="editor-step">03</span><div><h2>Components</h2><p>Interactive pieces under your message</p></div></div><div class="component-actions"><button class="component-add" id="add-button-component"><i data-lucide="square-mouse-pointer"></i><span><strong>Add button</strong><small>Link button</small></span><i data-lucide="plus"></i></button><button class="component-add" id="add-select-component"><i data-lucide="list-filter"></i><span><strong>Add select menu</strong><small>Choose from options</small></span><i data-lucide="plus"></i></button></div><div class="component-editor-list" id="component-editor-list"></div></div>
+          </div>
+          <div class="preview-column"><div class="preview-sticky"><div class="preview-topline"><span><span class="live-dot"></span> LIVE PREVIEW</span><span class="preview-label">DISCORD DARK</span></div><div class="discord-window"><div class="discord-channel-head"><i data-lucide="hash"></i><strong id="preview-channel-name">welcome</strong><span class="discord-channel-topic">Community announcements</span><i data-lucide="bell"></i><i data-lucide="users"></i></div><div class="discord-message-area"><div class="discord-date"><span></span><b>TODAY</b><span></span></div><div class="discord-message"><div class="discord-avatar" id="preview-avatar">H</div><div class="discord-message-body"><div class="discord-message-meta"><strong>Hectee</strong><span class="bot-badge">BOT</span><time>Today at 12:00 PM</time></div><div class="discord-content" id="preview-content"></div><div class="discord-embed" id="discord-embed"><div class="embed-accent" id="preview-accent"></div><div class="discord-embed-inner"><div class="discord-embed-author hidden" id="preview-author"><img class="author-icon hidden" id="preview-author-icon" alt=""><span id="preview-author-name"></span></div><div class="discord-embed-title" id="preview-title"></div><div class="discord-embed-description" id="preview-description"></div><div class="discord-embed-fields" id="preview-fields"></div><img class="discord-embed-thumbnail hidden" id="preview-thumbnail" alt="Embed thumbnail"><img class="discord-embed-image hidden" id="preview-image" alt="Embed image"><div class="discord-embed-footer hidden" id="preview-footer"></div></div></div><div class="preview-components" id="preview-components"></div></div></div><div class="discord-input-fake"><span>Message #<b id="preview-input-channel">welcome</b></span><i data-lucide="gift"></i><i data-lucide="smile"></i></div></div><div class="preview-footnote"><i data-lucide="info"></i><span>Preview approximates Discord's dark message style.</span></div></div></div>
+        </div>
+      </section>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </main>
+  </div>
+</body>
+</html>
